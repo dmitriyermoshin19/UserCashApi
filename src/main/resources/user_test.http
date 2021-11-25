@@ -1,0 +1,194 @@
+### получаем токен
+
+# curl -i -H "Content-Type: application/json" -X POST -d '{
+#    "username": "admin2",
+#    "password": "password",
+#    "role": {"id":"1","name":"user"}
+#}' http://localhost:8080/login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "name": "dimaAdmin",
+  "password": "password",
+  "role": {
+    "id": "2",
+    "name": "admin"
+  }
+
+}
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+"name": "dima1",
+"password": "password",
+"role": {
+"id": "1",
+"name": "user"
+}
+
+}
+
+### findAll()
+GET http://localhost:8080/user/
+
+### выводим список юсеров при помщи токена
+# curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjIiLCJleHAiOjE2MjEwMjA4ODh9.a8CNuyANzQF60p-s-T8a3EOIJwMKqL0SF9PyzDzahad2Sa-ORZqrUpwc4D1UL26Ccq_V9fStz4WN_VPV20jsAA" http://localhost:8080/users/
+GET http://localhost:8080/user/
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hQWRtaW4iLCJleHAiOjE2Mzk0ODI1NjF9.zgIMRBdjVY5bKSe0DNfdCUe3Klt2jLZ8rJm2pqLRgbFvErFrz2WRgHURBf4SPJMmBOwmLDfVBOWOA-xawPWWqA
+
+### findByAge(@PathVariable int age)
+GET http://localhost:8080/user/age/25
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hIiwiZXhwIjoxNjM5MTQ1NDIzfQ.dvNwvyzalmKkQIW76v4DAXkl-z3V1qAhKLw9doQE9xxlMbmpaqlPhi52X01OiKo8xEIxTaSV20Q4Y8GKLiSGdQ
+
+### findById(@PathVariable int id)
+GET http://localhost:8080/user/7
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hIiwiZXhwIjoxNjM5MTQ1NDIzfQ.dvNwvyzalmKkQIW76v4DAXkl-z3V1qAhKLw9doQE9xxlMbmpaqlPhi52X01OiKo8xEIxTaSV20Q4Y8GKLiSGdQ
+
+### findByPhone(@PathVariable String number)
+GET http://localhost:8080/user/phone/721211111
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hIiwiZXhwIjoxNjM5MTQ1NDIzfQ.dvNwvyzalmKkQIW76v4DAXkl-z3V1qAhKLw9doQE9xxlMbmpaqlPhi52X01OiKo8xEIxTaSV20Q4Y8GKLiSGdQ
+
+### findByName(@PathVariable String name)
+GET http://localhost:8080/user/name/Pet
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hIiwiZXhwIjoxNjM5MTQ1NDIzfQ.dvNwvyzalmKkQIW76v4DAXkl-z3V1qAhKLw9doQE9xxlMbmpaqlPhi52X01OiKo8xEIxTaSV20Q4Y8GKLiSGdQ
+
+### findByEmail(@PathVariable String email)
+GET http://localhost:8080/user/email/24email@ya
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hIiwiZXhwIjoxNjM5MTQ1NDIzfQ.dvNwvyzalmKkQIW76v4DAXkl-z3V1qAhKLw9doQE9xxlMbmpaqlPhi52X01OiKo8xEIxTaSV20Q4Y8GKLiSGdQ
+
+### create(@RequestBody User user)
+# curl -H 'Content-Type: application/json' -X POST -d
+#'{"id":"2","name":"dima","age":"23","email":"23email",
+#"phones":["+745677", "+745679"], "profile": { "id":"123", "canRead":"true"}}' http://localhost:8080/user/
+POST http://localhost:8080/user/sign-up
+Content-Type: application/json
+
+{
+  "name": "dimaAdmin",
+  "age": "28",
+  "email": "24email@ya",
+  "password": "password",
+
+  "profile": {
+    "cash": "20"
+  },
+
+  "phones": [
+    {
+      "value":"7112111114"
+    },
+    { "value":"7151111114"}
+  ]
+
+
+}
+###
+POST http://localhost:8080/user/sign-up
+Content-Type: application/json
+
+{
+  "name": "dima1",
+  "age": "28",
+  "email": "3email@y",
+  "password": "password",
+
+  "profile": {
+    "cash": "20"
+  },
+
+  "phones": [
+    {
+      "value":"7312111100"
+    },
+    { "value":"7351111100"}
+  ]
+
+
+}
+### delete(@PathVariable int id)  admin
+# curl -i -X DELETE http://localhost:8080/report/14
+DELETE http://localhost:8080/user/admin/4
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hQWRtaW4iLCJleHAiOjE2Mzk0ODI1NjF9.zgIMRBdjVY5bKSe0DNfdCUe3Klt2jLZ8rJm2pqLRgbFvErFrz2WRgHURBf4SPJMmBOwmLDfVBOWOA-xawPWWqA
+
+### delete(@PathVariable int id)  user
+# curl -i -X DELETE http://localhost:8080/report/14
+DELETE http://localhost:8080/user/admin/3
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hQWRtaW4iLCJleHAiOjE2Mzk0ODI1NjF9.zgIMRBdjVY5bKSe0DNfdCUe3Klt2jLZ8rJm2pqLRgbFvErFrz2WRgHURBf4SPJMmBOwmLDfVBOWOA-xawPWWqA
+
+
+### updateAge(@RequestBody User user)
+# curl -i -H 'Content-Type: application/json' -X PUT -d '{"id":"3","login":"supportjob4j.com","password":"123"}' http://localhost:8080/report/
+PUT http://localhost:8080/user/age
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hMSIsImV4cCI6MTY0MDA4OTQ2OH0.EUB6VoJBtdpbWmLwvneYVCOEAVUpdrbVZfwXz5aZqgQVPw4i-jcr0x4xGZLFAbyJQAO9munrJ_tTKVz_wGhBSA
+
+{
+
+  "name": "dima1",
+  "age": "23",
+  "password": "password2",
+
+  "profile": {
+    "cash": "202"
+  }
+}
+
+### updateEmail(@PathVariable int idUs, @RequestBody User user)
+PUT http://localhost:8080/user/email
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hMSIsImV4cCI6MTYzOTU5MjU3MX0.anhwGe5CjxnX-yhp8_vfusqDWfGAlh7rbYJ8SIGdcX8PZBc4-CNeBS_GyRUE2RMg4dMYyhpXWVX9-bJ6TSZYgg
+
+{
+  "name": "dima1",
+  "email": "3email@gmail.com"
+}
+
+### updatePassword(@RequestBody User user)
+# curl -i -H 'Content-Type: application/json' -X PUT -d '{"id":"3","login":"supportjob4j.com","password":"123"}' http://localhost:8080/report/
+PUT http://localhost:8080/user/password
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hMSIsImV4cCI6MTYzOTg0Nzg4M30.1ul4xLyfZuOfaH9f--B3L3W-B1U-8CW58jpVDEICXhMHw3ShNgXGBFlqJ013-m_NdgRz7FEyflWYK1xunWpC2Q
+
+{
+
+  "name": "dima1",
+  "age": "25",
+  "password": "password4",
+
+  "profile": {
+    "cash": "202"
+  }
+}
+
+### addCash(@RequestBody User user)
+# curl -i -H 'Content-Type: application/json' -X PUT -d '{"id":"3","login":"supportjob4j.com","password":"123"}' http://localhost:8080/report/
+PUT http://localhost:8080/user/add_cash
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hMSIsImV4cCI6MTYzOTg0Nzg4M30.1ul4xLyfZuOfaH9f--B3L3W-B1U-8CW58jpVDEICXhMHw3ShNgXGBFlqJ013-m_NdgRz7FEyflWYK1xunWpC2Q
+
+{
+
+  "name": "dima1",
+  "age": "25",
+  "password": "password7",
+
+    "cash": "20"
+
+}
+
+### addPhone(@RequestBody Phone phone, @PathVariable int idUs)
+PUT http://localhost:8080/user/add_phone
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW1hMSIsImV4cCI6MTYzOTg0Nzg4M30.1ul4xLyfZuOfaH9f--B3L3W-B1U-8CW58jpVDEICXhMHw3ShNgXGBFlqJ013-m_NdgRz7FEyflWYK1xunWpC2Q
+
+{
+  "name": "dima1",
+  "value": "784412899"
+}
+
+
+###
